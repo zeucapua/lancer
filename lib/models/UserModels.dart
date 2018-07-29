@@ -18,8 +18,8 @@ class User {
   User.fromJson(Map<String, dynamic> json)
       : username = json['username'],
         password = json['password'],
-        email    = json['email'],
-        projects = json['projects'];
+        email    = json['email'];
+        //projects = json['projects'];
 
   // create JSON body for future POST
   Map<String, dynamic> toJson() =>
@@ -27,7 +27,8 @@ class User {
         'username': username,
         'password': password,
         'email'   : email,
-        'projects': projects
+        'isFreelancer': this is Freelancer ? 1 : 0
+        //'projects': projects
       };
 }
 
@@ -45,16 +46,18 @@ class Client extends User {
   // construct from JSON response
   Client.fromJson(Map<String, dynamic> json)
       : organization = json['organization'],
-        super(json['username'], json['password'], json['email'], json['projects']);
+        super.fromJson({'username': json['username'],'password': json['password'],'email': json['email'],
+      //'projects': json['projects']
+      });
 
   // create JSON body for future POST
   Map<String, dynamic> toJson() =>
       {
         'username': username,
         'password': password,
-        'organization' : organization,
+//        'organization' : organization,
         'email'   : email,
-        'projects': projects
+        //'projects': projects
       };
 }
 
@@ -75,7 +78,9 @@ class Freelancer extends User {
       : job = json['job'],
         about = json['about'],
         services = json['services'],
-        super(json['username'], json['password'], json['email'], json['projects']);
+        super.fromJson({'username': json['username'], 'password': json['password'], 'email': json['email'],
+        //'projects': json['projects'], 'services': json['services'],
+      });
 
   // create JSON body for future POST
   Map<String, dynamic> toJson() =>
@@ -83,9 +88,9 @@ class Freelancer extends User {
         'username': username,
         'password': password,
         'email'   : email,
-        'job'     : job,
-        'about'   : about,
-        'projects': projects,
-        'services': services
+//        'job'     : job,
+//        'about'   : about,
+//        'projects': projects,
+//        'services': services
       };
 }
